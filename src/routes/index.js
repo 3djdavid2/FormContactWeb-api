@@ -4,7 +4,6 @@ const { google } = require('googleapis');
 const router = express.Router();
 require('dotenv').config();
 
-
 router.post('/send-email', (req, res) => {
     const { email, nombre, asunto, mensaje } = req.body
 
@@ -17,7 +16,7 @@ router.post('/send-email', (req, res) => {
         <p>Mensaje: ${mensaje}</p></br>
         </br></br>
         <h2>En breve nos pondremos en contacto con ud para contestar su requerimiento.</h2><br>
-        <h3>David Vivanco</h3>        
+        <h2>David Vivanco</h2>        
     `
 
     const oAuth2Client = new google.auth.OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET, process.env.REDIRECT_URI);
