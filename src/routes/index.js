@@ -5,14 +5,14 @@ const router = express.Router();
 require('dotenv').config();
 
 router.post('/send-email', (req, res) => {
-    const { email, nombre, asunto, mensaje } = req.body
+    const { email, nombre, telefono, mensaje } = req.body
 
     const contentHtml = `
     <h2>Gracias por contactarse con nosotros, le damos un cordial saludo de parte de DavidVivancoWeb.com</h2></br>
     <h2>Esta es su copia de respaldo de su formulario de contacto:</h2>
         <h2>Nombre: ${nombre}</h2>
         <p>Email: ${email}</p>
-        <p>Asunto: ${asunto}</p>
+        <p>Telefono: ${telefono}</p>
         <p>Mensaje: ${mensaje}</p></br>
         </br></br>
         <h2>En breve nos pondremos en contacto con ud para contestar su requerimiento.</h2><br>
@@ -40,7 +40,7 @@ router.post('/send-email', (req, res) => {
                 from: nombre,
                 to: email,
                 bcc: process.env.BCC_MAIL,
-                subject: asunto,
+                subject: "Info WEB DavidVivancoWeb- Confirm",
                 html: contentHtml,
             };
 
