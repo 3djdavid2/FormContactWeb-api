@@ -1,8 +1,12 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
-const { google } = require('googleapis');
+
 const router = express.Router();
 require('dotenv').config();
+
+router.get('/miapiget', (req,res)=>{
+    res.status(200).json({message: "get ok"})
+})
 
 router.post('/send-email', (req, res) => {
     const { email, nombre, telefono, mensaje } = req.body
@@ -19,28 +23,29 @@ router.post('/send-email', (req, res) => {
         <h2>David Vivanco</h2>        
     `
 
-    const oAuth2Client = new google.auth.OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET, process.env.REDIRECT_URI);
-    oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
-
+   
     async function sendMail() {
         try {
-            const accessToken = await oAuth2Client.getAccessToken();
+     
             const transporter = nodemailer.createTransport({
-                service: "gmail",
+                host: "mx.davidvivancowebapi.com",
+                port: 465,
+                secure: true, // use TLS
                 auth: {
-                    type: "OAuth2",
-                    user: process.env.USER_MAIL,
-                    clientId: process.env.CLIENT_ID,
-                    clientSecret: process.env.CLIENT_SECRET,
-                    refreshToken: process.env.REFRESH_TOKEN,
-                    accessToken: accessToken,
+                  user: "otro@davidvivancowebapi.com",
+                  pass: "Jav@1905",
+                },
+                tls: {
+                  // do not fail on invalid certs
+                //   servername: "mx.davidvivancowebapi.com",
+                  rejectUnauthorized: true,
                 },
             });
             const mailOptions = {
                 from: nombre,
                 to: email,
                 bcc: process.env.BCC_MAIL,
-                subject: "Info WEB DavidVivancoWeb- Confirm",
+                subject: "Solicitud recibida",
                 html: contentHtml,
             };
 
@@ -48,7 +53,7 @@ router.post('/send-email', (req, res) => {
             return result
 
         } catch (err) {
-            console.error(err)
+            console.error("El error es:", err)
         }
     }
 
