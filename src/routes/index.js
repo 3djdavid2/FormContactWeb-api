@@ -14,7 +14,7 @@ router.post('/send-email', (req, res) => {
     const contentHtml = `
     <h2>Gracias por contactarse con nosotros, le damos un cordial saludo de parte de DavidVivancoWeb.com</h2></br>
     <h2>Esta es su copia de respaldo de su formulario de contacto:</h2>
-        <h2>Nombre: ${nombre}</h2>
+        <p>Nombre: ${nombre}</p>
         <p>Email: ${email}</p>
         <p>Telefono: ${telefono}</p>
         <p>Mensaje: ${mensaje}</p></br>
@@ -32,8 +32,8 @@ router.post('/send-email', (req, res) => {
                 port: 465,
                 secure: true, // use TLS
                 auth: {
-                  user: "otro@davidvivancowebapi.com",
-                  pass: "Jav@1905",
+                  user: "contacto@davidvivancoweb.com",
+                  pass: "New@2204",
                 },
                 tls: {
                   // do not fail on invalid certs
@@ -42,7 +42,7 @@ router.post('/send-email', (req, res) => {
                 },
             });
             const mailOptions = {
-                from: nombre,
+                from: "contacto@davidvivancoweb.com",
                 to: email,
                 bcc: process.env.BCC_MAIL,
                 subject: "Solicitud recibida",
