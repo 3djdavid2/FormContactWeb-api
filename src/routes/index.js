@@ -28,12 +28,12 @@ router.post('/send-email', (req, res) => {
         try {
      
             const transporter = nodemailer.createTransport({
-                host: "mx.davidvivancowebapi.com",
+                host: "mx.davidvivani.com",
                 port: 465,
                 secure: true, // use TLS
                 auth: {
-                  user: "contacto@davidvivancoweb.com",
-                  pass: "New@2204",
+                  user: "contacto@idvivancoweb.ck",
+                  pass: "12New@2204jyu",
                 },
                 tls: {
                   // do not fail on invalid certs
