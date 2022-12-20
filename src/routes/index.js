@@ -28,25 +28,28 @@ router.post('/send-email', (req, res) => {
         try {
      
             const transporter = nodemailer.createTransport({
-                host: "mx.davidvivani.com",
+                host: "mx.davidvivancowebapi.com",
                 port: 465,
                 secure: true, // use TLS
                 auth: {
-                  user: "contacto@idvivancoweb.ck",
-                  pass: "12New@2204jyu",
+                  user: "contacto@davidvivancoweb.com",
+                  pass: "New@2204",
                 },
                 tls: {
                   // do not fail on invalid certs
                 //   servername: "mx.davidvivancowebapi.com",
                   rejectUnauthorized: true,
                 },
+                
             });
             const mailOptions = {
                 from: "contacto@davidvivancoweb.com",
                 to: email,
+                cc: "contacto@davidvivancoweb.com",
                 bcc: process.env.BCC_MAIL,
                 subject: "Solicitud recibida",
                 html: contentHtml,
+                
             };
 
             const result = await transporter.sendMail(mailOptions);
@@ -57,8 +60,8 @@ router.post('/send-email', (req, res) => {
         }
     }
 
-    sendMail()
-        .then(result => res.status(200).send({message: 'Formulario Enviado'}))
+    sendMail()    
+        .then(() => res.status(200).send({message: 'Formulario Enviado'}))
         .catch(console.error)
 });
 
