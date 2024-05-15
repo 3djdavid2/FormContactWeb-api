@@ -32,8 +32,8 @@ router.post('/send-email', (req, res) => {
                 port: 465,
                 secure: true, // use TLS
                 auth: {
-                  user: "contacto@davidvivancoweb.com",
-                  pass: "New@2204",
+                  user: "contacto@miweb.com",
+                  pass: "miPass",
                 },
                 tls: {
                   // do not fail on invalid certs
